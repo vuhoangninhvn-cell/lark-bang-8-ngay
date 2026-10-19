@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bài đăng 8 ngày</title>
+  <style>
+    :root { --bg: #ffffff; --text: #1f2329; --muted: #8f959e; --line: #dee0e3; --head: #f5f6f7;
+            --ok-bg: #7dd394; --ok-text: #0f4423; --bad-bg: #f26b6b; --bad-text: #ffffff; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
+                 font: 13px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    #app { display: flex; flex-direction: column; height: 100%; padding: 8px 12px 10px; gap: 8px; }
+    .head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; color: var(--muted); font-size: 12px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+    .legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .sw { width: 12px; height: 12px; border-radius: 3px; display: inline-block; border: 1px solid var(--line); }
+    .sw.ok { background: var(--ok-bg); border-color: var(--ok-bg); }
+    .sw.bad { background: var(--bad-bg); border-color: var(--bad-bg); }
+    .wrap { flex: 1; min-height: 120px; overflow: auto; border: 1px solid var(--line); border-radius: 6px; }
+    table { border-collapse: collapse; width: 100%; min-width: 640px; }
+    th, td { border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); padding: 6px 8px; text-align: center; white-space: nowrap; }
+    th { background: var(--head); font-weight: 600; position: sticky; top: 0; z-index: 1; }
+    th small { display: block; font-weight: 400; color: var(--muted); font-size: 11px; }
+    td.name, th.name { text-align: left; position: sticky; left: 0; background: var(--bg); z-index: 2; }
+    th.name { background: var(--head); z-index: 3; }
+    td.num { font-variant-numeric: tabular-nums; font-weight: 600; }
+    td.ok { background: var(--ok-bg); color: var(--ok-text); }
+    td.bad { background: var(--bad-bg); color: var(--bad-text); }
+    td.na { color: var(--muted); font-weight: 400; }
+    td.target, td.sum { color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    th:last-child, td:last-child { border-right: none; }
+    .msg { color: var(--muted); padding: 16px; text-align: center; }
+    .cfg { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; border-top: 1px solid var(--line); padding-top: 8px; }
+    .cfg[hidden] { display: none; }
+    .cfg button { background: #3370ff; color: #fff; border: 0; border-radius: 6px; padding: 7px 16px; font: inherit; font-weight: 600; cursor: pointer; }
+    .cfg button:disabled { opacity: .6; cursor: default; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="head">
+      <div class="legend">
+        <span><i class="sw ok"></i>Đạt chỉ tiêu ngày</span>
+        <span><i class="sw bad"></i>Chưa đạt</span>
+        <span><i class="sw"></i>Không chấm theo ngày</span>
+      </div>
+      <div id="updated"></div>
+    </div>
+    <div class="wrap" id="wrap"><div class="msg">Đang tải dữ liệu…</div></div>
+    <div class="cfg" id="cfg" hidden>
+      <span>Nguồn: bảng <b id="srcName">Chỉ tiêu dự án × kênh</b>. Bấm Lưu để thêm khối này vào dashboard.</span>
+      <button type="button" id="saveBtn">Lưu</button>
+      <span id="saveMsg"></span>
+    </div>
+  </div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
